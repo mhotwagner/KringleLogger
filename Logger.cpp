@@ -50,7 +50,8 @@ Logger::Logger(String id, HTTPClient* apiClient, HardwareSerial* serialClient, i
 
 bool Logger::testApi() {
 	logSerial("[Logger] Testing api");
-	_apiClient->begin("http://" + _apiHost + "/api/status/");
+	WiFiClient wifiClient;
+	_apiClient->begin(wifiClient, "http://" + _apiHost + "/api/status/");
 	int status = _apiClient->GET();
 	_apiClient->end();
 	logSerial(String(status));
@@ -90,7 +91,8 @@ bool Logger::logApi(String message) {
 	DynamicJsonDocument doc(256);
 	doc["message"] = message;
 	doc["ornament_mac_address"] = WiFi.macAddress();
-	_apiClient->begin("http://" + _apiHost + "/api/logs/");
+	WiFiClient wifiClient;
+	_apiClient->begin(wifiClient, "http://" + _apiHost + "/api/logs/");
 	_apiClient->addHeader("Content-Type", "application/json");
 	
 	String content;

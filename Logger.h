@@ -41,11 +41,11 @@ class Logger {
     void log(size_t message, int logLevel);
     void log(long unsigned int message, int logLevel);
 
-    int ALL = 0;
-    int DEBUG = 1;
-    int INFO = 2;
-    int WARN = 3;
-    int ERROR = 4;
+    static const int ALL = 0;
+    static const int DEBUG = 1;
+    static const int INFO = 2;
+    static const int WARN = 3;
+    static const int ERROR = 4;
 
   private:
     bool testApi();
